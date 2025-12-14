@@ -60,6 +60,36 @@ Custom chat modes define specific behaviors and tools for GitHub Copilot Chat, e
 These chatmodes are from [Claude Code Hooks Mastery](https://github.com/disler/claude-code-hooks-mastery/tree/main/.claude/output-styles): 
 Bullet Points, GenUI, HTML Structured, Markdown Focused, Table Based, Ultra Concise, YAML Structured
 
+## 🤖 Agents Extended
+
+**Agents Extended** is an advanced workflow system that leverages GitHub Copilot's custom agent capabilities to create sophisticated multi-agent workflows with automatic handoffs between specialized personas.
+
+Unlike simple chat modes that modify response formatting, Agents Extended creates a complete software engineering team inside VS Code. Each agent is a specialized expert with distinct responsibilities, tools, and the ability to automatically hand off work to other agents when their part is complete.
+
+### How It Works
+
+The Agents Extended system uses:
+- **Specialized Agents**: Each agent has a specific role (implementation, review, testing, etc.)
+- **Automatic Handoffs**: Agents can trigger handoffs to other agents with structured context
+- **Tool Access**: Agents have access to VS Code tools (search, edit, run tests, etc.)
+- **Structured Communication**: Agents exchange information using predefined templates to ensure nothing is lost in transition
+
+### Available Agents
+
+| Agent | Role | Handoffs To |
+| ----- | ---- | ----------- |
+|[Developer Agent](developer.agent.md) | Professional engineering assistant that provides full reasoning, planning, and verification for implementation tasks. Shows complete thought process from understanding through execution. | Reviewer Agent (automatic after implementation) |
+|[Reviewer Agent](reviewer.agent.md) | Senior software engineer performing thorough code reviews. Evaluates correctness, maintainability, security, and adherence to standards. Provides structured, actionable feedback. | Developer Agent (when changes needed) |
+
+### Usage Example
+
+1. Start with the Developer Agent for implementation work
+2. Developer Agent completes the task and automatically hands off to Reviewer Agent with a structured review request
+3. Reviewer Agent performs code review and either approves or hands back to Developer with specific feedback
+4. Developer Agent implements feedback and the cycle continues until approval
+
+This creates a real engineering workflow with checks and balances, ensuring higher quality outputs than single-agent approaches.
+
 ## Contributing to Open Source
 
 Contributions are welcome! If you have a custom chat mode you'd like to share, please submit a pull request.
